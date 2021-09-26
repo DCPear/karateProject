@@ -180,4 +180,10 @@ class FeatureRunner {
             </plugin>   
   
 ````
+Using exisitng code - using feature, features can call another feature to return values
+calling other feature
+````
+     * def tokenRes = callonce read('classpath:helpers/CreateToken.feature'){  "email": "karatelove@test.com",  "password": "karate1'3"  }
+````
+Manage environment variables -karate-config.js
 

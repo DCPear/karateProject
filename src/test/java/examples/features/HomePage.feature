@@ -1,7 +1,7 @@
 # Test Home page
 Feature: Test Home page
    Background: Define URL
-     Given url 'http://localhost:3000/api/'
+     Given url apiUrl
 
      #verify response is an array and each array element is a string. And verify some values
   @second

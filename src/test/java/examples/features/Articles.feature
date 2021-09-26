@@ -1,14 +1,10 @@
 # Test articles
+
 Feature: Test articles
    Background: Define URL
-     Given url 'http://localhost:3000/api/'
-
-     Given path 'users/login'
-     And request {  "user": {  "email": "karatelove@test.com",  "password": "karate1'3"  }}
-     When method Post
-     Then status 200
-     And print response
-     * def token = response.user.token
+     Given url apiUrl
+     * def tokenRes = callonce read('classpath:helpers/CreateToken.feature')
+     * def token = tokenRes.authToken
      And print token
 
      #Login and grab token received to  post an articles
