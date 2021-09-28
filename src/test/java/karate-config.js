@@ -1,7 +1,6 @@
 //keep this file simple as possible
 function fn() {
-  //var env = karate.env; // get system property 'karate.env'
-  var env = 'dev';
+  var env = karate.env; // get system property 'karate.env'
   karate.log('karate.env system property was:', env);
   if (!env) {
     env = 'dev';
@@ -15,5 +14,9 @@ function fn() {
   } else if (env == 'e2e') {
     // customize
   }
+
+  var accessToken = karate.callSingle('classpath:helpers/CreateToken.feature', config).authToken
+  karate.configure('headers', {Authorization: 'Token ' + accessToken})
+
   return config;
 }

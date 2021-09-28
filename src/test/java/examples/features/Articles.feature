@@ -1,18 +1,25 @@
 # Test articles
 
 Feature: Test articles
-   Background: Define URL
-     Given url apiUrl
-     * def tokenRes = callonce read('classpath:helpers/CreateToken.feature')
-     * def token = tokenRes.authToken
-     And print token
+
+  Background: Define URL
+    Given url apiUrl
 
      #Login and grab token received to  post an articles
   Scenario:  login and create a new article
 
-    Given header Authorization = 'Token ' + token
     Given path 'articles'
-    And request { "article": {  "tagList": [],  "title": "Love Karate",  "description": "Testing this api",  "body": "Love Karate" }}
+    And request
+    """
+     {
+        "article": {
+            "tagList": [],
+            "title": "Love Karate",
+            "description": "Testing this api",
+            "body": "Love Karate"
+            }
+     }
+    """
     When method Post
     Then status 200
     And print response
@@ -21,7 +28,6 @@ Feature: Test articles
   @debug
   Scenario:  create and delete an article
     #Create an article
-    Given header Authorization = 'Token ' + token
     Given path 'articles'
     And request { "article": {  "tagList": [],  "title": "To be deleted",  "description": "Testing this api",  "body": "Love Karate" }}
     When method Post
@@ -37,7 +43,6 @@ Feature: Test articles
     And match response.articles[0].title =='To be deleted'
 
     #use the authorization for delete
-    Given header Authorization = 'Token ' + token
     Given path 'articles',articleId
     When method Delete
     Then status 204

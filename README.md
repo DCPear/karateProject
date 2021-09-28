@@ -186,4 +186,22 @@ calling other feature
      * def tokenRes = callonce read('classpath:helpers/CreateToken.feature'){  "email": "karatelove@test.com",  "password": "karate1'3"  }
 ````
 Manage environment variables -karate-config.js
+Create global header
+create the access token once in config.js
+````
+var accessToken = karate.callSingle('classpath:helpers/CreateToken.feature', config).authToken
+  karate.configure('headers', {Authorization: 'Token ' + accessToken})
+````
+formating multiline expressions
+"""    """
+
+fuzzy matching - validation of type
+
+Test-Data Generator java faker maven
+https://mvnrepository.com/artifact/com.github.javafaker/javafaker
+add to pom.xml dependencies
+
+can create java static methods to use in feature files without instantiating.
+
+
 
